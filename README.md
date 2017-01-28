@@ -15,7 +15,7 @@ Build the docker image and run it.
 
 ```shell
 docker build -t secret-santa . 
-docker run secret-santa santa.py $YOURFILE
+docker run -v $YOURFILE:/app/$YOURFILE secret-santa app/santa.py app/$YOURFILE
 ```
 
 ## TODO
