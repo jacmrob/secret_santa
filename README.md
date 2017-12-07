@@ -5,8 +5,8 @@
 Requires an xlsx file with columns (in order) of the format:
 * name
 * email
-* helpful hint
 * people you don't wish to gift to
+And then additional columns of survey questions/answers if you wish to give more information to your gifters.  Save this file in the root directory.
 
 ## Run
 
@@ -15,12 +15,14 @@ Build the docker image and run it.
 
 ```shell
 docker build -t secret-santa . 
-docker run -v $YOURFILE:/app/$YOURFILE secret-santa app/santa.py app/$YOURFILE
 ```
 
-## TODO
+To send a custom email, create your own Jinja template and put it in the `templates` directory.
 
-Pull out email into own template.
-Perhaps allow to customize bot  email? (so don't have to maintain a bot email)
+Then, run the docker and pass it your xlsx file name, custom (or default) jinja template name, and the email and password of the email account you wish to use to notify participants.
+
+```shell
+docker run -v $PWD:/app secret-santa santa.py <xlsx file> <jinja template> <email> <password>
+```
 
 

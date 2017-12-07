@@ -6,6 +6,12 @@ from email.MIMEText import MIMEText
 import openpyxl
 import random
 
+from jinja2 import Environment, FileSystemLoader, select_autoescape
+env = Environment(
+  loader=FileSystemLoader(os.path.join(os.path.dirname(os.path.abspath(__file__)), 'templates')),
+    autoescape=select_autoescape(['html', 'xml'])
+)
+
 # Class: a gifter 
 class Santa():
 
@@ -61,50 +67,46 @@ class NorthPole():
 
     print "Done."
 
-  def email_santas(self, santas, botemail):
+  def email_santas(self, santas, from_addr, password):
     for name, santa in santas.iteritems():
       print "Emailing %s their secret santa!!" % name 
       giftee_name = santa.giftee 
       giftee = santas[giftee_name]
-      self._send_email(santa.email, botemail, giftee.name, giftee.description)
+      self._send_email(santa.email, from_addr, password, giftee.name, giftee.description)
     print "Done."
 
   # todo: pull html out as separate file 
-  def _send_email(self, to_addr, from_addr, giftee, description):
-    from_addr = 'secret.krampus2016@gmail.com'
+  def _send_email(self, to_addr, from_addr, password, giftee, email_template, subject='Your Secret Santa!', year=2017):
     server = smtplib.SMTP('smtp.gmail.com', 587)
     server.starttls()
-    server.login(from_addr, 'secretsanta')
+    server.login(from_addr, password)
 
     msg = MIMEMultipart()
     msg['From'] = from_addr
     msg['To'] = to_addr
-    msg['Subject'] = 'Your Secret Santa!'
+    msg['Subject'] = subject
 
-    body = "Happy Crimbus! <br></br> You signed up for Secret Krampus 2016, courtesy of Jackie, Sophie, and Mike. <br></br>" \
-         "The wheel of fate (a random number generator) has been spun, and you'll be giving a gift to... <br></br>" \
-         "<b>{0} </b> <br></br>" \
-         "Your guest of honor has granted you this information to help you out: </br></br>" \
-         "<b>{1}</b> <br></br>" \
-         "Remember to keep your trinket under $20, and to come 'round to 74 Alpine Street at 6pm on December 18th for festivities! <br></br>" \
-         "Happy gifting! <br></br>" \
-         "-- The Krampus Bot (i.e. Jackie's Incredible Coding Skills Inc.)".format(giftee, description)
-
+    body = self._render_template(email_template, giftee)
+    
     msg.attach(MIMEText(body, 'html'))
     server.sendmail(from_addr, to_addr, msg.as_string())
     server.quit()
 
+  def _render_template(self, t, giftee, year=2017):
+    template = env.get_template(t)
+    return template.render(year=year, name=giftee.name, survey=giftee.survey)
+
 
 if __name__ == '__main__':
   spreadsheet_file = sys.argv[1]  
-  email = sys.argv[2]
-  email_template = sys.argv[3]  # TODO:
+  email_template = sys.argv[2] 
+  email = sys.argv[3]
+  password = sys.argv[4]
 
   np = NorthPole()
   santas = np.generate_santas(spreadsheet_file)
-  print santas
   np.sort_santas(santas)
-  np.email_santas(santas, email)
+  np.email_santas(santas, email, password)
 
 
 

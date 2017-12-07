@@ -1,0 +1,18 @@
+<header>
+Happy Crimbus! 
+</header>
+<p>
+You signed up for Secret Santa {{year}}, hosted by Aaron, Dorothy, and Jackie!  Your secret santa is...
+<p><b>{{name}}</b></p>
+They answered the following questions to help you find the perfect gift!
+</p>
+{% for k,v in survey.iteritems() %}
+  		<b>{{ k }}</b>
+  		<br></br>
+  		<i>{{ v }}</i>
+  		<br></br>
+  {% endfor %}
+<p>Happy gifting!  Remember to keep your gift under $20.
+See you at 64 Prospect St on Saturday Dec. 16th at 8pm!</p>
+
+</body>
