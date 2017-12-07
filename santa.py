@@ -9,11 +9,11 @@ import random
 # Class: a gifter 
 class Santa():
 
-  def __init__(self, name, email, description, black_list):
+  def __init__(self, name, email, black_list, survey):
     self.name = name 
     self.email = email
-    self.description = description
     self.black_list = self.set_up_blacklist(black_list, name)
+    self.survey = survey
     self.giftee = None 
 
   def set_up_blacklist(self, blacklist, name):
@@ -21,6 +21,7 @@ class Santa():
       return blacklist.split(",") + [name]
     else:
       return [name]
+
 
 
 # Class: where the work of secret santas takes place 
@@ -31,8 +32,12 @@ class NorthPole():
     santas = {}
     wb = openpyxl.load_workbook(file)
     ws = wb.active 
-    for row in ws.iter_rows():
-      cells = [c.internal_value for c in row]
+
+    headers = [c.internal_value for c in ws[1]]
+
+    for row in ws.iter_rows(min_row=2):
+      cells = [c.internal_value for c in row[0:3]]
+      cells.append({headers[i+3]:c.internal_value for i,c in enumerate(row[3:])})
       santa = Santa(*cells)
       santas[santa.name] = santa 
     print "Done."
@@ -56,27 +61,27 @@ class NorthPole():
 
     print "Done."
 
-  def email_santas(self, santas):
+  def email_santas(self, santas, botemail):
     for name, santa in santas.iteritems():
       print "Emailing %s their secret santa!!" % name 
       giftee_name = santa.giftee 
       giftee = santas[giftee_name]
-      self._send_email(santa.email, giftee.name, giftee.description)
+      self._send_email(santa.email, botemail, giftee.name, giftee.description)
     print "Done."
 
   # todo: pull html out as separate file 
-  def _send_email(self, to_addr, giftee, description):
+  def _send_email(self, to_addr, from_addr, giftee, description):
     from_addr = 'secret.krampus2016@gmail.com'
     server = smtplib.SMTP('smtp.gmail.com', 587)
     server.starttls()
-    server.login(from_addr, 'secretkrampus')
+    server.login(from_addr, 'secretsanta')
 
     msg = MIMEMultipart()
     msg['From'] = from_addr
     msg['To'] = to_addr
-    msg['Subject'] = 'Your Secret Krampus!'
+    msg['Subject'] = 'Your Secret Santa!'
 
-    body = "Merry Krampusnacht! <br></br> You signed up for Secret Krampus 2016, courtesy of Jackie, Sophie, and Mike. <br></br>" \
+    body = "Happy Crimbus! <br></br> You signed up for Secret Krampus 2016, courtesy of Jackie, Sophie, and Mike. <br></br>" \
          "The wheel of fate (a random number generator) has been spun, and you'll be giving a gift to... <br></br>" \
          "<b>{0} </b> <br></br>" \
          "Your guest of honor has granted you this information to help you out: </br></br>" \
@@ -91,11 +96,15 @@ class NorthPole():
 
 
 if __name__ == '__main__':
-  f = sys.argv[1]  
+  spreadsheet_file = sys.argv[1]  
+  email = sys.argv[2]
+  email_template = sys.argv[3]  # TODO:
+
   np = NorthPole()
-  santas = np.generate_santas(f)
+  santas = np.generate_santas(spreadsheet_file)
+  print santas
   np.sort_santas(santas)
-  np.email_santas(santas)
+  np.email_santas(santas, email)
 
 
 
