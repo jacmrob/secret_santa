@@ -16,31 +16,38 @@
     #mordis {
       display: inline-block;
       text-align: center;
-      background-color:rgba(255,255,255,0.8);
+      background-color:rgba(255,255,255,0.9);
       max-width: 500px;
+    }
+    .star {
+      width:20px;
+      height:20px;
+    }
+    .light {
+      width:100%;
     }
   </style>
   <body>
     <div id="blordis">
       <div id="mordis">
-          <iframe src="https://giphy.com/embed/A27PZDSLuK6ys" width="480" height="119" frameBorder="0"></iframe>
+          <img src="light.gif" alt="light" class="light" />
           <h3>Happy Crimbus!</h3>
           <p>Welcome to TOASTY &amp; TIPSY {{year}}! We are overjoyed that you will be joining us for merriment and friendship as we embark on the journey of the long cold time.</p>
 
           <p>The chrimbus angel will now open his hole to reveal your secret santa inside. Your secret santa is:</p>
           
           <p>
-            <iframe src="https://giphy.com/embed/14fDrAdZN9cKPu" width="20" height="20" frameBorder="0"></iframe>  
+            <img src="star.gif" alt="star" class="star" />
             <span class="bold">{{name}}</span>
-            <iframe src="https://giphy.com/embed/14fDrAdZN9cKPu" width="20" height="20" frameBorder="0"></iframe> 
+            <img src="star.gif" alt="star" class="star" />
           </p>
           <p>They answered the following questions to help you find the perfect gift!</p>
-          <!-- {% for k,v in survey.iteritems() %} -->
+          {% for k,v in survey.iteritems() %}
             <p>
               <span class="bold">{{ k }}</span><br>
               <span class="italic">{{ v }}</span><br>  
             </p>
-          <!-- {% endfor %} -->
+          {% endfor %}
           <p>
             Happy gifting! Remember to keep your gift under $20.
             See you at 64 Prospect St on Saturday Dec. 16th at 7pm!
@@ -49,7 +56,7 @@
             Love,<br>
             The Crimbus Bot (aka zurn &amp; dort &amp; krakus)
           </p>
-          <iframe src="https://giphy.com/embed/A27PZDSLuK6ys" width="480" height="119" frameBorder="0"></iframe>
+          <img src="light.gif" alt="light" class="light" />
         </div>
       </div>
       
