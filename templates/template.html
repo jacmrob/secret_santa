@@ -1,26 +1,57 @@
 <html>
   <style type="text/css">
+    body {
+      font-family: "Comic Sans MS", Arial, sans-serif;
+    }
     .bold {
       font-weight: bold;
     }
     .italic {
-      font-weight: italic;
+      font-style: italic;
+    }
+    #blordis {
+      background-image: url("https://nebula.wsimg.com/obj/MjZGQUE2MEIzRUU5Nzk1MkM1RDA6OWFmMjBlZjQ2N2U0ZTVkYWRjMGY1ZjY4Nzk4NGQ2OGI6Ojo6OjA=");
+      text-align: center;
+    }
+    #mordis {
+      display: inline-block;
+      text-align: center;
+      background-color:rgba(255,255,255,0.8);
+      max-width: 500px;
     }
   </style>
   <body>
-    <h3>Happy Crimbus!</h3>
-    <div>
-      <p>You signed up for Secret Santa {{year}}, hosted by Aaron, Dorothy, and Jackie!  Your secret santa is...</p>
-      <p class="bold">{{name}}</p>
-      <p>They answered the following questions to help you find the perfect gift!</p>
-      {% for k,v in survey.iteritems() %}
-        <span class="bold">{{ k }}</span><br>
-        <span class="italic">{{ v }}</span><br>
-      {% endfor %}
-      <p>
-        Happy gifting! Remember to keep your gift under $20.
-        See you at 64 Prospect St on Saturday Dec. 16th at 8pm!
-      </p>
-  </div>
+    <div id="blordis">
+      <div id="mordis">
+          <iframe src="https://giphy.com/embed/A27PZDSLuK6ys" width="480" height="119" frameBorder="0"></iframe>
+          <h3>Happy Crimbus!</h3>
+          <p>Welcome to TOASTY &amp; TIPSY {{year}}! We are overjoyed that you will be joining us for merriment and friendship as we embark on the journey of the long cold time.</p>
+
+          <p>The chrimbus angel will now open his hole to reveal your secret santa inside. Your secret santa is:</p>
+          
+          <p>
+            <iframe src="https://giphy.com/embed/14fDrAdZN9cKPu" width="20" height="20" frameBorder="0"></iframe>  
+            <span class="bold">{{name}}</span>
+            <iframe src="https://giphy.com/embed/14fDrAdZN9cKPu" width="20" height="20" frameBorder="0"></iframe> 
+          </p>
+          <p>They answered the following questions to help you find the perfect gift!</p>
+          <!-- {% for k,v in survey.iteritems() %} -->
+            <p>
+              <span class="bold">{{ k }}</span><br>
+              <span class="italic">{{ v }}</span><br>  
+            </p>
+          <!-- {% endfor %} -->
+          <p>
+            Happy gifting! Remember to keep your gift under $20.
+            See you at 64 Prospect St on Saturday Dec. 16th at 7pm!
+          </p>
+          <p>
+            Love,<br>
+            The Crimbus Bot (aka zurn &amp; dort &amp; krakus)
+          </p>
+          <iframe src="https://giphy.com/embed/A27PZDSLuK6ys" width="480" height="119" frameBorder="0"></iframe>
+        </div>
+      </div>
+      
   </body>
 </html>
