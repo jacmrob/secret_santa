@@ -26,39 +26,47 @@
     .light {
       width:100%;
     }
+    #snowflake {
+      background-image: url("https://thumbs.gfycat.com/DampBlondDinosaur-max-1mb.gif");
+      display: inline-block;
+      width:70%;
+      height: 100px;
+    }
+    #name {
+      font-size: larger;
+      padding-top:35px;
+    }
   </style>
   <body>
     <div id="blordis">
       <div id="mordis">
-          <img src="light.gif" alt="light" class="light" />
-          <h3>Happy Crimbus!</h3>
-          <p>Welcome to TOASTY &amp; TIPSY {{year}}! We are overjoyed that you will be joining us for merriment and friendship as we embark on the journey of the long cold time.</p>
+        <img src="http://moziru.com/images/lamps-clipart-animated-gif-3.gif" alt="light" class="light" />
+        <h3>Happy Crimbus!</h3>
+        <p>Welcome to TOASTY &amp; TIPSY {{year}}! We are overjoyed that you will be joining us for merriment and friendship as we embark on the journey of the long cold time.</p>
 
-          <p>The chrimbus angel will now open his hole to reveal your secret santa inside. Your secret santa is:</p>
-          
-          <p>
-            <img src="star.gif" alt="star" class="star" />
-            <span class="bold">{{name}}</span>
-            <img src="star.gif" alt="star" class="star" />
-          </p>
-          <p>They answered the following questions to help you find the perfect gift!</p>
-          {% for k,v in survey.iteritems() %}
-            <p>
-              <span class="bold">{{ k }}</span><br>
-              <span class="italic">{{ v }}</span><br>  
-            </p>
-          {% endfor %}
-          <p>
-            Happy gifting! Remember to keep your gift under $20.
-            See you at 64 Prospect St on Saturday Dec. 16th at 7pm!
-          </p>
-          <p>
-            Love,<br>
-            The Crimbus Bot (aka zurn &amp; dort &amp; krakus)
-          </p>
-          <img src="light.gif" alt="light" class="light" />
+        <p>The chrimbus angel will now open his hole to reveal your secret santa inside. Your secret santa is:</p>
+
+        <div id="snowflake">
+          <div class="bold" id="name">{{name}}</div>
         </div>
+        
+        <p>They answered the following questions to help you find the perfect gift!</p>
+        {% for k,v in survey.iteritems() %}
+          <p>
+            <span class="bold">{{ k }}</span><br>
+            <span class="italic">{{ v }}</span><br>  
+          </p>
+        {% endfor %}
+        <p>
+          Happy gifting! Remember to keep your gift under $20.
+          See you at 64 Prospect St on Saturday Dec. 16th at 7pm!
+        </p>
+        <p>
+          Love,<br>
+          The Crimbus Bot (aka zurn &amp; dort &amp; krakus)
+        </p>
+        <img src="http://moziru.com/images/lamps-clipart-animated-gif-3.gif" alt="light" class="light" />
       </div>
-      
+    </div>
   </body>
 </html>
