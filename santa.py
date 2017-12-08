@@ -42,10 +42,11 @@ class NorthPole():
     headers = [c.internal_value for c in ws[1]]
 
     for row in ws.iter_rows(min_row=2):
-      cells = [c.internal_value for c in row[0:3]]
-      cells.append({headers[i+3]:c.internal_value for i,c in enumerate(row[3:])})
-      santa = Santa(*cells)
-      santas[santa.name] = santa 
+      if row[0].internal_value != None:
+        cells = [c.internal_value for c in row[0:3]]
+        cells.append({headers[i+3]:c.internal_value for i,c in enumerate(row[3:])})
+        santa = Santa(*cells)
+        santas[santa.name] = santa 
     print "Done."
     return santas 
 
@@ -67,12 +68,12 @@ class NorthPole():
 
     print "Done."
 
-  def email_santas(self, santas, from_addr, password):
+  def email_santas(self, santas, from_addr, password, template):
     for name, santa in santas.iteritems():
       print "Emailing %s their secret santa!!" % name 
       giftee_name = santa.giftee 
       giftee = santas[giftee_name]
-      self._send_email(santa.email, from_addr, password, giftee.name, giftee.description)
+      self._send_email(santa.email, from_addr, password, giftee, template)
     print "Done."
 
   # todo: pull html out as separate file 
@@ -105,8 +106,9 @@ if __name__ == '__main__':
 
   np = NorthPole()
   santas = np.generate_santas(spreadsheet_file)
+
   np.sort_santas(santas)
-  np.email_santas(santas, email, password)
+  np.email_santas(santas, email, password, email_template)
 
 
 
