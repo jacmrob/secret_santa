@@ -15,19 +15,19 @@ env = Environment(
 # Class: a gifter 
 class Santa():
 
-  def __init__(self, name, email, black_list, survey):
+  def __init__(self, name, email, black_list, friends, survey):
     self.name = name 
     self.email = email
     self.black_list = self.set_up_blacklist(black_list, name)
+    self.friends = self.set_up_friendslist(friends)
     self.survey = survey
     self.giftee = None 
 
   def set_up_blacklist(self, blacklist, name):
-    if blacklist:
-      return blacklist.split(",") + [name]
-    else:
-      return [name]
+    return blacklist.split(",") + [name] if blacklist else [name]
 
+  def set_up_friendslist(self, friendslist):
+    return friendslist.split(",") if friendslist else []
 
 
 # Class: where the work of secret santas takes place 
@@ -43,8 +43,8 @@ class NorthPole():
 
     for row in ws.iter_rows(min_row=2):
       if row[0].internal_value != None:
-        cells = [c.internal_value for c in row[0:3]]
-        cells.append({headers[i+3]:c.internal_value for i,c in enumerate(row[3:])})
+        cells = [c.internal_value for c in row[0:4]]
+        cells.append({headers[i+3]:c.internal_value for i,c in enumerate(row[4:])})
         santa = Santa(*cells)
         santas[santa.name] = santa 
     print "Done."
@@ -77,7 +77,7 @@ class NorthPole():
     print "Done."
 
   # todo: pull html out as separate file 
-  def _send_email(self, to_addr, from_addr, password, giftee, email_template, subject='Your Secret Santa!', year=2017):
+  def _send_email(self, to_addr, from_addr, password, giftee, email_template, subject='Your Secret Santa!', year=2018):
     server = smtplib.SMTP('smtp.gmail.com', 587)
     server.starttls()
     server.login(from_addr, password)
@@ -95,7 +95,7 @@ class NorthPole():
 
   def _render_template(self, t, giftee, year=2017):
     template = env.get_template(t)
-    return template.render(year=year, name=giftee.name, survey=giftee.survey)
+    return template.render(year=year, name=giftee.name, friends=giftee.friends, survey=giftee.survey)
 
 
 if __name__ == '__main__':

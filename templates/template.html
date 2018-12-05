@@ -3,26 +3,35 @@
     <div style="background-image:url('https://nebula.wsimg.com/obj/MjZGQUE2MEIzRUU5Nzk1MkM1RDA6OWFmMjBlZjQ2N2U0ZTVkYWRjMGY1ZjY4Nzk4NGQ2OGI6Ojo6OjA=');text-align:center">
       <div style="display:inline-block;text-align:center;background-color:rgba(255,255,255,0.9);max-width:500px">
         <img src="http://moziru.com/images/lamps-clipart-animated-gif-3.gif" alt="light" style="width:100%" />
-        <h3>Happy Crimbus!</h3>
-        <p>Welcome to TOASTY &amp; TIPSY {{year}}! We are overjoyed that you will be joining us for merriment and friendship as we embark on the journey of the long cold time.</p>
+        <h3>We're back!!</h3>
+        <p>It's the {{year}} Chrimbus Special: sluts n sleet! What are you gonna get for Chrimbus?</p>
+        <a href="https://www.youtube.com/watch?v=V399tenKALA&t=1s"></a>
 
-        <p>The chrimbus angel will now open his hole to reveal your secret santa inside. Your secret santa is:</p>
+        <p>What're you gonna GIVE for Chrimbus?  Your secret santa is...</p>
 
         <div style="background-image:url('https://thumbs.gfycat.com/DampBlondDinosaur-max-1mb.gif');display:inline-block;width:70%;height:100px">
           <div style="font-weight:bold;font-size:24px;padding-top:35px">{{name}}</div>
         </div>
-        
-        <p>They answered the following questions to help you find the perfect gift!</p>
-        {% for k,v in survey.iteritems() %}
-          <p>
-            <span style="font-weight:bold">{{ k }}</span><br>
-            <span style="font-style:italic">{{ v }}</span><br>  
-          </p>
+
+        <p>If you need some advice for what to get them, try asking:</p>
+        {% for k in friends %}
+        <p>
+          <span style="font-weight:bold">{{ k }}</span><br>
+        </p>
         {% endfor %}
         <br>
+        
+        <!--<p>They answered the following questions to help you find the perfect gift!</p>-->
+        <!--{% for k,v in survey.iteritems() %}-->
+          <!--<p>-->
+            <!--<span style="font-weight:bold">{{ k }}</span><br>-->
+            <!--<span style="font-style:italic">{{ v }}</span><br>-->
+          <!--</p>-->
+        <!--{% endfor %}-->
+        <!--<br>-->
         <p>
           Happy gifting! Remember to keep your gift under $20.
-          See you at 64 Prospect St on Saturday Dec. 16th at 7pm!
+          See you at 265 Western Ave Apt 5 on Friday Dec. 14th at 7:30pm!
         </p>
         <p>
           Love,<br>

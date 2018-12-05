@@ -6,6 +6,8 @@ Requires an xlsx file with columns (in order) of the format:
 * name
 * email
 * people you don't wish to gift to
+* close friends to provide advice on gifts
+
 And then additional columns of survey questions/answers if you wish to give more information to your gifters.  Save this file in the root directory.
 
 ## Run
